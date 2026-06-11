@@ -24,13 +24,14 @@ border-radius:10px;
 box-shadow:0 2px 10px rgba(0,0,0,0.1);
 }
 
-button{
-background:red;
+.btn{
+display:inline-block;
+background:#2563eb;
 color:white;
-border:none;
 padding:10px 15px;
-cursor:pointer;
+text-decoration:none;
 border-radius:5px;
+margin-top:10px;
 }
 
 </style>
@@ -47,21 +48,15 @@ border-radius:5px;
 
 let flats = JSON.parse(localStorage.getItem("flats")) || [];
 
-function showFlats(){
-
 let container = document.getElementById("flatsContainer");
 
-container.innerHTML = "";
+if(flats.length===0){
 
-if(flats.length === 0){
+container.innerHTML="<h3>No Flats Available</h3>";
 
-container.innerHTML = "<h3 style='text-align:center'>No Flats Available</h3>";
+}else{
 
-return;
-
-}
-
-flats.forEach((flat,index)=>{
+flats.forEach((flat)=>{
 
 container.innerHTML += `
 
@@ -73,9 +68,9 @@ container.innerHTML += `
 
 <p><b>Rent:</b> ₹${flat.rent}</p>
 
-<button onclick="deleteFlat(${index})">
-Delete Flat
-</button>
+<a href="flat-details.html" class="btn">
+View Details
+</a>
 
 </div>
 
@@ -84,22 +79,6 @@ Delete Flat
 });
 
 }
-
-function deleteFlat(index){
-
-if(confirm("Delete this flat?")){
-
-flats.splice(index,1);
-
-localStorage.setItem("flats",JSON.stringify(flats));
-
-showFlats();
-
-}
-
-}
-
-showFlats();
 
 </script>
 
