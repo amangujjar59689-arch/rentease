@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>My Flats</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f5f7fa;
+padding:20px;
+}
+
+h1{
+text-align:center;
+}
+
+.card{
+background:white;
+padding:20px;
+margin:15px auto;
+max-width:500px;
+border-radius:10px;
+box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+
+button{
+background:red;
+color:white;
+border:none;
+padding:10px 15px;
+border-radius:5px;
+cursor:pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>My Flats</h1>
+
+<div id="container"></div>
+
+<script>
+
+let flats = JSON.parse(localStorage.getItem("flats")) || [];
+
+function loadFlats(){
+
+let container=document.getElementById("container");
+
+container.innerHTML="";
+
+if(flats.length===0){
+
+container.innerHTML="<h3>No Flats Added</h3>";
+
+return;
+
+}
+
+flats.forEach((flat,index)=>{
+
+container.innerHTML += `
+
+<div class="card">
+
+<h2>${flat.title}</h2>
+
+<p><b>City:</b> ${flat.city}</p>
+
+<p><b>Rent:</b> ₹${flat.rent}</p>
+
+<button onclick="deleteFlat(${index})">
+Delete Flat
+</button>
+
+</div>
+
+`;
+
+});
+
+}
+
+function deleteFlat(index){
+
+if(confirm("Delete this Flat?")){
+
+flats.splice(index,1);
+
+localStorage.setItem("flats",JSON.stringify(flats));
+
+loadFlats();
+
+}
+
+}
+
+loadFlats();
+
+</script>
+
+</body>
+</html>
