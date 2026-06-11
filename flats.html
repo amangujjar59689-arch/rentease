@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
 <head>
 <title>Available Flats</title>
@@ -24,14 +25,13 @@ border-radius:10px;
 box-shadow:0 2px 10px rgba(0,0,0,0.1);
 }
 
-.btn{
-display:inline-block;
+button{
 background:#2563eb;
 color:white;
+border:none;
 padding:10px 15px;
-text-decoration:none;
+cursor:pointer;
 border-radius:5px;
-margin-top:10px;
 }
 
 </style>
@@ -56,7 +56,7 @@ container.innerHTML="<h3>No Flats Available</h3>";
 
 }else{
 
-flats.forEach((flat)=>{
+flats.forEach((flat,index)=>{
 
 container.innerHTML += `
 
@@ -68,15 +68,23 @@ container.innerHTML += `
 
 <p><b>Rent:</b> ₹${flat.rent}</p>
 
-<a href="flat-details.html" class="btn">
+<button onclick="viewDetails(${index})">
 View Details
-</a>
+</button>
 
 </div>
 
 `;
 
 });
+
+}
+
+function viewDetails(index){
+
+localStorage.setItem("selectedFlat",JSON.stringify(flats[index]));
+
+window.location.href="flat-details.html";
 
 }
 
