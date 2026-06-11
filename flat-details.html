@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
 <head>
 <title>Flat Details</title>
@@ -15,52 +16,62 @@ padding:30px;
 max-width:700px;
 margin:auto;
 background:white;
-padding:20px;
+padding:25px;
 border-radius:10px;
-}
-
-img{
-width:100%;
-border-radius:10px;
+box-shadow:0 2px 10px rgba(0,0,0,0.1);
 }
 
 .btn{
 display:inline-block;
-padding:12px 20px;
 background:#2563eb;
 color:white;
+padding:12px 20px;
 text-decoration:none;
 border-radius:5px;
 margin-top:15px;
 }
 
 </style>
+
 </head>
 
 <body>
 
 <div class="container">
 
-<img src="https://picsum.photos/700/400">
+<h1 id="title"></h1>
 
-<h1>2 BHK Luxury Flat</h1>
+<p><b>City:</b> <span id="city"></span></p>
 
-<p><b>City:</b> Mohali</p>
+<p><b>Rent:</b> ₹<span id="rent"></span></p>
 
-<p><b>Rent:</b> ₹15,000/month</p>
+<p><b>Address:</b> <span id="address"></span></p>
 
-<p><b>Address:</b> Phase 7 Mohali</p>
+<p><b>Description:</b></p>
 
-<p>
-Fully Furnished Flat with Parking,
-WiFi and Security.
-</p>
+<p id="description"></p>
 
 <a href="booking.html" class="btn">
 Book Now
 </a>
 
 </div>
+
+<script>
+
+let flat = JSON.parse(localStorage.getItem("selectedFlat"));
+
+if(flat){
+
+document.getElementById("title").innerText = flat.title;
+document.getElementById("city").innerText = flat.city;
+document.getElementById("rent").innerText = flat.rent;
+document.getElementById("address").innerText = flat.address;
+document.getElementById("description").innerText = flat.description;
+
+}
+
+</script>
 
 </body>
 </html>
