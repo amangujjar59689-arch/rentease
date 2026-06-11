@@ -4,7 +4,6 @@
 <title>Add Flat</title>
 
 <style>
-
 body{
 font-family:Arial;
 background:#f5f7fa;
@@ -17,10 +16,9 @@ margin:auto;
 background:white;
 padding:25px;
 border-radius:10px;
-box-shadow:0 2px 10px rgba(0,0,0,0.1);
 }
 
-input, textarea, select{
+input{
 width:100%;
 padding:10px;
 margin:10px 0;
@@ -29,12 +27,11 @@ margin:10px 0;
 button{
 background:#2563eb;
 color:white;
+padding:12px;
 border:none;
-padding:12px 20px;
 cursor:pointer;
-border-radius:5px;
+width:100%;
 }
-
 </style>
 </head>
 
@@ -44,28 +41,41 @@ border-radius:5px;
 
 <h1>Add Flat</h1>
 
-<input type="text" placeholder="Flat Title">
+<input type="text" id="title" placeholder="Flat Title">
 
-<input type="text" placeholder="City">
+<input type="text" id="city" placeholder="City">
 
-<input type="text" placeholder="Address">
+<input type="number" id="rent" placeholder="Monthly Rent">
 
-<input type="number" placeholder="Monthly Rent">
-
-<select>
-<option>1 BHK</option>
-<option>2 BHK</option>
-<option>3 BHK</option>
-<option>4 BHK</option>
-</select>
-
-<textarea placeholder="Flat Description"></textarea>
-
-<input type="file">
-
-<button>Add Flat</button>
+<button onclick="addFlat()">
+Add Flat
+</button>
 
 </div>
+
+<script>
+
+function addFlat(){
+
+let title=document.getElementById("title").value;
+let city=document.getElementById("city").value;
+let rent=document.getElementById("rent").value;
+
+let flats=JSON.parse(localStorage.getItem("flats")) || [];
+
+flats.push({
+title:title,
+city:city,
+rent:rent
+});
+
+localStorage.setItem("flats",JSON.stringify(flats));
+
+alert("Flat Added Successfully");
+
+}
+
+</script>
 
 </body>
 </html>
