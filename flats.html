@@ -69,8 +69,7 @@ container.innerHTML += `
 
 <div class="card">
 
-<img src="${flat.image}" alt="Flat Image">
-
+<img src="${flat.images ? flat.images[0] : flat.image}">
 <h2>${flat.title}</h2>
 
 <p><b>City:</b> ${flat.city}</p>
