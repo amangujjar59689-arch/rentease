@@ -55,6 +55,8 @@ border-radius:5px;
 
 <textarea id="description" placeholder="Flat Description"></textarea>
 
+<input type="text" id="image" placeholder="Photo URL">
+
 <button onclick="addFlat()">
 Add Flat
 </button>
@@ -70,26 +72,24 @@ let city=document.getElementById("city").value;
 let rent=document.getElementById("rent").value;
 let address=document.getElementById("address").value;
 let description=document.getElementById("description").value;
+let image=document.getElementById("image").value;
 
 let flats=JSON.parse(localStorage.getItem("flats")) || [];
 
 flats.push({
-title:title,
-city:city,
-rent:rent,
-address:address,
-description:description
+title,
+city,
+rent,
+address,
+description,
+image
 });
 
 localStorage.setItem("flats",JSON.stringify(flats));
 
 alert("Flat Added Successfully");
 
-document.getElementById("title").value="";
-document.getElementById("city").value="";
-document.getElementById("rent").value="";
-document.getElementById("address").value="";
-document.getElementById("description").value="";
+location.reload();
 
 }
 
