@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Flats</title>
+<title>Available Flats</title>
 
 <style>
 
@@ -11,15 +11,30 @@ background:#f5f7fa;
 padding:20px;
 }
 
+h1{
+text-align:center;
+}
+
 .card{
 background:white;
-padding:15px;
-margin:15px;
+padding:20px;
+margin:15px auto;
+max-width:500px;
 border-radius:10px;
 box-shadow:0 2px 10px rgba(0,0,0,0.1);
 }
 
+button{
+background:red;
+color:white;
+border:none;
+padding:10px 15px;
+cursor:pointer;
+border-radius:5px;
+}
+
 </style>
+
 </head>
 
 <body>
@@ -30,25 +45,61 @@ box-shadow:0 2px 10px rgba(0,0,0,0.1);
 
 <script>
 
-let flats=JSON.parse(localStorage.getItem("flats")) || [];
+let flats = JSON.parse(localStorage.getItem("flats")) || [];
 
-let container=document.getElementById("flatsContainer");
+function showFlats(){
 
-flats.forEach(flat=>{
+let container = document.getElementById("flatsContainer");
+
+container.innerHTML = "";
+
+if(flats.length === 0){
+
+container.innerHTML = "<h3 style='text-align:center'>No Flats Available</h3>";
+
+return;
+
+}
+
+flats.forEach((flat,index)=>{
 
 container.innerHTML += `
+
 <div class="card">
 
 <h2>${flat.title}</h2>
 
-<p>City: ${flat.city}</p>
+<p><b>City:</b> ${flat.city}</p>
 
-<p>Rent: ₹${flat.rent}</p>
+<p><b>Rent:</b> ₹${flat.rent}</p>
+
+<button onclick="deleteFlat(${index})">
+Delete Flat
+</button>
 
 </div>
+
 `;
 
 });
+
+}
+
+function deleteFlat(index){
+
+if(confirm("Delete this flat?")){
+
+flats.splice(index,1);
+
+localStorage.setItem("flats",JSON.stringify(flats));
+
+showFlats();
+
+}
+
+}
+
+showFlats();
 
 </script>
 
