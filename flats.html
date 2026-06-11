@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Available Flats</title>
+<title>Flats</title>
 
 <style>
 
@@ -11,74 +11,46 @@ background:#f5f7fa;
 padding:20px;
 }
 
-.container{
-display:flex;
-flex-wrap:wrap;
-gap:20px;
-justify-content:center;
-}
-
 .card{
 background:white;
-width:300px;
 padding:15px;
+margin:15px;
 border-radius:10px;
 box-shadow:0 2px 10px rgba(0,0,0,0.1);
 }
 
-img{
-width:100%;
-border-radius:10px;
-}
-
-.btn{
-display:inline-block;
-margin-top:10px;
-padding:10px 15px;
-background:#2563eb;
-color:white;
-text-decoration:none;
-border-radius:5px;
-}
 </style>
-
 </head>
 
 <body>
 
-<h1 align="center">Available Flats</h1>
+<h1>Available Flats</h1>
 
-<div class="container">
+<div id="flatsContainer"></div>
 
+<script>
+
+let flats=JSON.parse(localStorage.getItem("flats")) || [];
+
+let container=document.getElementById("flatsContainer");
+
+flats.forEach(flat=>{
+
+container.innerHTML += `
 <div class="card">
-<img src="https://picsum.photos/300/200">
 
-<h3>2 BHK Flat</h3>
+<h2>${flat.title}</h2>
 
-<p>Mohali</p>
+<p>City: ${flat.city}</p>
 
-<p>₹15,000/month</p>
-
-<a href="flat-details.html" class="btn">
-View Details
-</a>
-</div>
-
-<div class="card">
-<img src="https://picsum.photos/301/200">
-
-<h3>3 BHK Flat</h3>
-
-<p>Chandigarh</p>
-
-<p>₹22,000/month</p>
-
-<a href="flat-details.html" class="btn">
-View Details
-</a>
-</div>
+<p>Rent: ₹${flat.rent}</p>
 
 </div>
+`;
+
+});
+
+</script>
 
 </body>
 </html>
